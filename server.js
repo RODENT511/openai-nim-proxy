@@ -225,6 +225,18 @@ app.post('/v1/chat/completions', async (req, res) => {
     });
   }
 });
+// Root check (fix for Janitor / Lorebook)
+app.get('/', (req, res) => {
+  res.json({
+    status: 'ok',
+    message: 'OpenAI proxy is running'
+  });
+});
+
+// Optional: /v1 check
+app.get('/v1', (req, res) => {
+  res.json({ status: 'ok' });
+});
 
 // Catch-all for unsupported endpoints
 app.all('*', (req, res) => {
